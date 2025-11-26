@@ -1,8 +1,9 @@
-import { warmStrategyCache } from 'workbox-recipes';
+import { warmStrategyCache, offlineFallback } from 'workbox-recipes';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
+
 
 
 self.addEventListener("install", () => self.skipWaiting());
@@ -66,4 +67,8 @@ registerRoute(
     ],
   })
 );
+
+offlineFallback({
+    pageFallback: '/offline.html',
+});
 
